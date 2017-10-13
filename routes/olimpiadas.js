@@ -3,8 +3,6 @@ var router = express.Router();
 
 var User =require('../models/users');
 var Event = require('../models/events');
-var New =require('../models/news');
-var Team = require('../models/teams');
 var path = require('path');
 var Hash = require('jshashes');
 
