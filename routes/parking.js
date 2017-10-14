@@ -47,7 +47,7 @@ function deg2rad(deg) {
     return deg * (Math.PI/180)
 }
 
-router.get("/nearParking/",function (req,res) {
+router.get("/nearParking",function (req,res) {
 
 
     var userlat=req.body.lat
@@ -90,9 +90,7 @@ router.get("/nearParking/",function (req,res) {
                 res.send(sorted[0])
             })
 
-
         }
-
 
     });
 

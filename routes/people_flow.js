@@ -27,12 +27,20 @@ router.get('/sensor/:provider/:sensor/:number', function (req, res) {
 });
 
 router.get('/landmark', function (req, res) {
-    Provider.find({type:"pepople"}).exec(function (err, token) {
+    var landmarks=[Object];
+    Provider.findOne({type:"people_flow"}).exec(function (err, token) {
         request({
-            uri: URL +"/" + token.name+"?limit="+req.params.number,
+            uri: URL +"/" + token.name+"?limit=3",
             headers: {"IDENTITY_KEY": token.token, "Content-Type": "application/json"}
         }, function (error, response, body) {
-            res.send(body);
+            var all;
+            var sensors=JSON.parse(body);
+           for(var i=0;i<sensors.sensors.length;i++){
+               for(var j=0;j<sensors.sensors[i].length;j++){
+                 console.log(sensors.sensors[i].observations);
+               }
+           }
+            res.send(sensors);
         })
     })
 });
