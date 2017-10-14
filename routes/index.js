@@ -77,6 +77,6 @@ function putTimer() {
 app.listen(3500, function () {
 
 
-     setInterval(putTimer, 3000);
+     //setInterval(putTimer, 3000);
     console.log('App listening on port 3500!!')
 });
