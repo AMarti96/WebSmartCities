@@ -5,7 +5,8 @@ var mongoose = require('mongoose');
 var providers = mongoose.Schema({
     name: String,
     token: String,
-    type:String
+    types:String
 });
+
 var Provider = mongoose.model('providers', providers);
 module.exports = Provider;
