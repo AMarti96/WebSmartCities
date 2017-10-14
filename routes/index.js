@@ -38,7 +38,6 @@ app.use("/air",readAirQuality);
 app.use("/people",readPeople);
 
 app.post("/newInfo",function (req,res) {
-    console.log(req.body.provider);
     if(req.body.provider===air.name)
         socket.emit('newco2',req.body);
     else if(req.body.provider===parking.name)
