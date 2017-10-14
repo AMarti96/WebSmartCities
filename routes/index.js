@@ -56,10 +56,10 @@ function putTimer(sensor) {
 
 // Configure the request
     var options = {
-        url: 'https://api.thingtia.cloud/data/'+sensor.name+'/'+sensor.sensor+rnd,
+        url: 'https://api.thingtia.cloud/data/'+sensor.name+'/'+sensor.sensor,
         method: 'PUT',
         headers: headers,
-        body:JSON.stringify({"observations":[{"value":getRndInteger(350,5000), "location": location }]})
+        body:JSON.stringify({"observations":[{"value":sensor.value, "location": sensor.location }]})
     }
 
 // Start the request
@@ -171,7 +171,7 @@ function putTimer3() {
 
 app.listen(3500, function () {
 
-    //setInterval(putTimer1, 60000);
+    setInterval(putTimer1, 2000);
     //setInterval(putTimer2, 60000);
     //setInterval(putTimer3, 60000);
     console.log('App listening on port 3500!!')
