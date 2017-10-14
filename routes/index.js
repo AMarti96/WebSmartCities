@@ -38,9 +38,8 @@ app.use("/air",readAirQuality);
 app.use("/people",readPeople);
 
 app.post("/newInfo",function (req,res) {
-    console.log(req.body);
-    socket.emit();
-    res.send("OK");
+    console.log(req.provider);
+    socket.emit('newco2',req.body.observations);
 });
 var socket=io.on('connection',function (socket) {
 
@@ -68,15 +67,15 @@ function putTimer(sensor) {
 // Start the request
     request(options, function (error, response, body) {
         // Print out the response body
-        console.log(options);
+        //console.log(options);
     })
 }
 
 app.listen(80, function () {
 
-    setInterval(function(){ putTimer(air) }, 10000);
-    //setInterval(function(){ putTimer(parking) }, 6000);
-    //setInterval(function(){ putTimer(people) }, 6000);
+    setInterval(function(){ putTimer(air) },10000);
+    //setInterval(function(){ putTimer(parking) },10000);
+    //setInterval(function(){ putTimer(people) },10000);
     console.log('App listening on port 80!!')
 });
 server.listen(3500)
