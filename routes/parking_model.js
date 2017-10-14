@@ -6,7 +6,7 @@ var parking = {
     "variables":[
     {
         "sensor":"Parking_Meter1",
-        "location":"41.384047343293545 2.163749948012992"
+        "location":"41.38665542419419 2.166163936126395"
     },
     {
         "sensor":"Parking_Meter2",
