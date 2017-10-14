@@ -38,7 +38,8 @@ app.use("/air",readAirQuality);
 app.use("/people",readPeople);
 
 app.post("/newInfo",function (req,res) {
-    console.log(req.provider);
+    console.log(req.params.provider);
+    console.log(req.body);
     socket.emit('newco2',req.body.observations);
 });
 var socket=io.on('connection',function (socket) {
