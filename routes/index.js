@@ -39,7 +39,7 @@ app.use("/air",readAirQuality);
 app.listen(3500, function () {
 
     var tokens=[]
-    Provider.find(function(err,provider_tokens){
+    Provider.find("",function(err,provider_tokens){
         for (var i = 0; i < provider_tokens.length; i++) {
 
             tokens.push({name:provider_tokens[i].name,token:provider_tokens[i].token,type:provider_tokens[i].type})
