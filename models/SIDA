@@ -1,26 +1,3 @@
-var express = require('express');
-var router = express.Router();
-
-var User =require('../models/users');
-var Event = require('../models/events');
-var path = require('path');
-var Hash = require('jshashes');
-
-router.post('/logout',function (req, res) {
-    username="";
-    res.send("200")
-});
-
-router.post('/push', function (req, res) {
-    var pass = req.body.password;
-    var passhash = new Hash.SHA256(pass).hex(pass);
-    u = new User({name: req.body.name, password: passhash, image: false, active: true});
-    u.save().then(function () {
-        User.find({name: req.body.name}).then(function (response) {
-            res.send(response);
-        });
-    });
-});
 
 router.post('/loginw', function (req, res) {
     var pass = req.body.password;
@@ -34,7 +11,6 @@ router.post('/loginw', function (req, res) {
 
     });
 });
-
 
 router.delete('/deleteadv', function (req, res) {
 
@@ -323,5 +299,3 @@ router.post('/login',function (req, res) {
 router.get('*', function(req, res){
     res.sendFile(path.join(__dirname, '../public/tpls', 'error.html'));
 });
-
-module.exports = router;

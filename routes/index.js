@@ -11,13 +11,7 @@ module.exports=app;
 var Schema = mongoose.Schema;
 
 
-mongoose.connect("mongodb://localhost:27017/olimpiades", function (err) {
-    if (!err) {
-        console.log("We are connected")
-    }
-});
-
-var readOlimpiadas = require("./olimpiadas");
+var readOlimpiadas = require("./parking");
 
 var u;
 app.use(express.static('public'));
