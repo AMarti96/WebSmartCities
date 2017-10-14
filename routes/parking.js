@@ -3,10 +3,7 @@ var router = express.Router();
 var request = require('request');
 var http=require('http')
 const URL="https://api.thingtia.cloud/data";
-
 //var User =require('../models/users');
-var Parking = require('../models/parking');
-var Provider = require('../models/provider');
 var path = require('path');
 //var Hash = require('jshashes');
 
