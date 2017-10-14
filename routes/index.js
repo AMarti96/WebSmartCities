@@ -41,30 +41,31 @@ function getRndInteger(min, max) {
 }
 
 function putTimer() {
-    var rnd= getRndInteger(1,3)
-    var location
-    if(rnd=1){
-        location="41.3888 2.15899"
-    }else if(rmd=2){
-        location="41,3925 2,1451"
-    }else{if (rnd=3)
-        location="41,3913 2,1801"
-    }
-    request({
-        method: 'PUT',
-        uri: "https://api.thingtia.cloud/data/6772696769746f/CO2_Meter1",
-                headers: {
-                    'Content-Type': 'application/json',
-                    'IDENTITY_KEY': "f37a27ae85763ebe4276455d873ec12d206a96ae1c818f2717376a3cd3165e7a"
-                },
-                body: JSON.stringify({"observations": [{"value": getRndInteger(350,5000), "location":location ,'content_type': 'text/plain'}]},
-                    function (error, response, body) {
-                        console.log(error)
 
-                    })})}
+// Set the headers
+    var headers = {
+        'Content-Type': 'application/json',
+        'IDENTITY_KEY': "f37a27ae85763ebe4276455d873ec12d206a96ae1c818f2717376a3cd3165e7a"
+    }
+
+// Configure the request
+    var options = {
+        url: 'https://api.thingtia.cloud/data/6772696769746f/CO2_Meter3',
+        method: 'PUT',
+        headers: headers,
+        body:JSON.stringify({"observations":[{"value":"500", "location": "41.3913 2.1801000000000386" }]})
+    }
+
+// Start the request
+    request(options, function (error, response, body) {
+            // Print out the response body
+            console.log(body)
+
+    })
+}
 
 app.listen(3500, function () {
 
-    setInterval(putTimer, 10000);
+    setInterval(putTimer, 3000);
     console.log('App listening on port 3500!!')
 });
