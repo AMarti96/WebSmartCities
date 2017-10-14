@@ -8,7 +8,6 @@ var cors = require('cors');
 var request = require('request');
 var Provider = require('../models/provider');
 module.exports=app;
-var localStorage = require('localStorage');
 
 //var Schema = mongoose.Schema;
 
