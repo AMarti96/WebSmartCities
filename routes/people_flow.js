@@ -2,7 +2,7 @@ var express = require('express');
 var router = express.Router();
 var request = require('request');
 const URL="https://api.thingtia.cloud/data";
-var Provider =require('../models/provider');
+var Provider =require('./provider');
 
 
 router.get('/sensor/:types', function (req, res) {
@@ -14,8 +14,6 @@ router.get('/sensor/:types', function (req, res) {
             nodes.push({name:token[i].name,token:token[i].token})
 
         }
-
-
         for (var i=0;i<nodes.length;i++){
             name=nodes[i];
             request({
@@ -25,13 +23,10 @@ router.get('/sensor/:types', function (req, res) {
                 body=JSON.parse(body)
                 for(i=0;i<body.sensors.length;i++) {
                     sensors.push({provider:name.name,sensor:body.sensors[i].sensor, location:body.sensors[i].observations[0].location,value:body.sensors[i].observations[0].value})
-
                 }
                 res.send(sensors);
-
-                })
+            })
         }
-
     })
 });
 router.get('/sensor/:provider/:sensor/:number', function (req, res) {
@@ -67,5 +62,4 @@ router.get('/landmark', function (req, res) {
 router.get('*', function(req, res){
     res.sendFile(path.join(__dirname, '../public/tpls', 'error.html'));
 });
-
 module.exports = router;

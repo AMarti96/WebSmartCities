@@ -2,18 +2,13 @@ var express = require('express');
 var bodyParser = require( 'body-parser' );
 var app = express();
 var router = express.Router();
-app.use( bodyParser.urlencoded({ extended: true }) );
-var mongoose = require('mongoose');
-var multer = require('multer');
 var cors = require('cors');
 var request = require('request');
-var air=require('../models/airquality');
-var parking=require('../models/parking');
-var people=require('../models/people');
+var air=require('./airquality');
+var parking=require('./parking');
+var people=require('./people');
 module.exports=app;
-var localStorage = require('localStorage');
-
-//var Schema = mongoose.Schema;
+var mongoose = require('mongoose');
 
 mongoose.connect("mongodb://localhost:27017/providers", function (err) {
     if (!err) {
@@ -22,7 +17,7 @@ mongoose.connect("mongodb://localhost:27017/providers", function (err) {
 });
 
 var readAirQuality=require("./air-quality");
-var readParking = require("./parking");
+var readParking = require("./parking_meter");
 var readPeople = require("./people_flow");
 
 app.use(express.static('public'));

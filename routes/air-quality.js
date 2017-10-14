@@ -4,16 +4,9 @@
 var express = require('express');
 var router = express.Router();
 var request = require('request');
-var Provider = require('../models/provider');
-//var User =require('../models/users');
-//var Event = require('../models/events');
-//var AirQuality = require('../models/airquality');
+var Provider = require('./provider');
 var path = require('path');
-var HashMap= require('hashmap')
 const URL='https://api.thingtia.cloud/data';
-
-//var Hash = require('jshashes');
-
 router.get('/sensor/:provider/:sensor/:number', function (req, res) {
 
     var provider = req.params.provider;
