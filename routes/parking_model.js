@@ -15,6 +15,10 @@ var parking = {
     {
         "sensor":"Parking_Meter3",
         "location":"41.392759856096234 2.1448724254150875"
+    },
+    {
+        "sensor":"Parking_Meter4",
+        "location":"41.394920095556266 2.175614833831787"
     }
     ]
 }

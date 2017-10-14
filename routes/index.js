@@ -5,7 +5,11 @@ var cors = require('cors');
 var air=require('./airquality_model');
 var parking=require('./parking_model');
 var people=require('./people_model');
+var request=require('request');
 var mongoose = require('mongoose');
+var server=require('http').createServer(app);
+var io=require('socket.io')(server);
+var connections=[];
 
 mongoose.connect("mongodb://localhost:27017/providers", function (err) {
     if (!err) {
@@ -35,9 +39,12 @@ app.use("/people",readPeople);
 
 app.post("/newInfo",function (req,res) {
     console.log(req.body);
+    socket.emit();
     res.send("OK");
 });
+var socket=io.on('connection',function (socket) {
 
+})
 function getRndInteger(min, max) {
     return Math.floor(Math.random() * (max - min + 1) ) + min;
 }
@@ -50,7 +57,6 @@ function putTimer(sensor) {
         'Content-Type': 'application/json',
         'IDENTITY_KEY': sensor.token
     }
-
 // Configure the request
     var options = {
         url: 'https://api.thingtia.cloud/data/'+sensor.name+'/'+sensor.variables[rnd].sensor,
@@ -68,8 +74,9 @@ function putTimer(sensor) {
 
 app.listen(80, function () {
 
-    //setInterval(function(){ putTimer(air) }, 3000);
-    //setInterval(function(){ putTimer(parking) }, 3000);
-    //setInterval(function(){ putTimer(people) }, 3000);
+    setInterval(function(){ putTimer(air) }, 10000);
+    //setInterval(function(){ putTimer(parking) }, 6000);
+    //setInterval(function(){ putTimer(people) }, 6000);
     console.log('App listening on port 80!!')
 });
+server.listen(3500)

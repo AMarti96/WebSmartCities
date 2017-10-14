@@ -18,6 +18,10 @@ var airquality = {
             {
                 "sensor":"CO2_Meter3",
                 "location":"41.3888 2.158990000000017"
+            },
+            {
+                "sensor":"CO2_Meter4",
+                "location":"41.38272233367812 2.1769505739212036"
             }
     ]
 }
