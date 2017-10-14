@@ -7,14 +7,30 @@ var path = require('path');
 //var Hash = require('jshashes');
 
 
-router.get('/sensor/:provider', function (req, res) {
-    Provider.findOne({name: req.params.provider}).exec(function (err, token) {
-        request({
-            uri: URL + "/" + token.name,
-            headers: {"IDENTITY_KEY": token.token, "Content-Type": "application/json"}
-        }, function (error, response, body) {
-            res.send(body);
-        })
+router.get('/sensor/:types', function (req, res) {
+    var nodes=[];
+    var sensors=[];
+    var name;
+    Provider.find({types:req.params.types}).exec(function (err, token) {
+        for(i=0;i<token.length;i++){
+            nodes.push({name:token[i].name,token:token[i].token})
+
+        }
+
+        for (var i=0;i<nodes.length;i++){
+            name=nodes[i];
+            request({
+                uri: URL + "/" + nodes[i].name,
+                headers: {"IDENTITY_KEY": nodes[i].token, "Content-Type": "application/json"}
+            }, function (error, response, body) {
+                body=JSON.parse(body)
+                for(i=0;i<body.sensors.length;i++) {
+                    sensors.push({provider:name.name,sensor:body.sensors[i].sensor, location:body.sensors[i].observations[0].location,value:body.sensors[i].observations[0].value})
+
+                }
+                res.send(sensors);
+            })
+        }
     })
 });
 router.get('/sensor/:provider/:sensor/:number', function (req, res) {
@@ -47,11 +63,11 @@ function deg2rad(deg) {
     return deg * (Math.PI/180)
 }
 
-router.get("/nearParking",function (req,res) {
+router.post("/nearParking",function (req,res) {
 
 
-    var userlat=41.3925
-    var userlon=2.1450999999999567
+    var userlat=req.body.lat
+    var userlon=req.body.lon
     var sensors= []
     var nodes=[]
     var distances= []

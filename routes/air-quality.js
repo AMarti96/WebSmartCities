@@ -13,16 +13,7 @@ var HashMap= require('hashmap')
 const URL='https://api.thingtia.cloud/data';
 
 //var Hash = require('jshashes');
-/*
- function getMapTypes() {
- var types= new HashMap();
- var i=0;
- var providers=JSON.parse(localStorage.getItem("tokens"))
- for(i;i<providers.length;i++){
- types.set(providers[i].name,providers[i].type)
- }
- return types
- }*/
+
 router.get('/sensor/:provider/:sensor/:number', function (req, res) {
 
     var provider = req.params.provider;
@@ -39,32 +30,33 @@ router.get('/sensor/:provider/:sensor/:number', function (req, res) {
             res.send(body)
         })
     });
-    /*var types= getMapTypes()
-     var provider_type=types.get(provider)
-     var provider_types=JSON.parse(provider_type)
-     if(provider_types.indexOf("park_meter")!=undefined){
-     //request
-     }
-     else {
-     //error
-     }
-     */
 
 });
-router.get('/sensor/:provider', function (req, res) {
+router.get('/sensor/:types', function (req, res) {
+    var nodes=[];
+    var sensors=[];
+    var name;
+    Provider.find({types:req.params.types}).exec(function (err, token) {
+        for(i=0;i<token.length;i++){
+            nodes.push({name:token[i].name,token:token[i].token})
 
+        }
 
-    var provider = req.params.provider;
-    var URI=URL+'/'+provider;
-    Provider.findOne({name:provider}).exec(function (err,tokens) {
-        var token=tokens.token;
-        request( {
-            uri:URI,
-            headers: {"IDENTITY_KEY":token,"Content-Type": "application/json"}
-        },function (error,response,body) {
-            res.send(body)
-        })
-    });
+        for (var i=0;i<nodes.length;i++){
+            name=nodes[i];
+            request({
+                uri: URL + "/" + nodes[i].name,
+                headers: {"IDENTITY_KEY": nodes[i].token, "Content-Type": "application/json"}
+            }, function (error, response, body) {
+                body=JSON.parse(body)
+                for(i=0;i<body.sensors.length;i++) {
+                    sensors.push({provider:name.name,sensor:body.sensors[i].sensor, location:body.sensors[i].observations[0].location,value:body.sensors[i].observations[0].value})
+
+                }
+                res.send(sensors);
+            })
+        }
+    })
 });
 
 
