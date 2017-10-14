@@ -69,14 +69,43 @@ function putTimer() {
 // Start the request
     request(options, function (error, response, body) {
             // Print out the response body
-            console.log(rnd+"  "+location)
+    })
+}
+function putTimer2() {
+    var rnd=getRndInteger(1,3)
+    var location
+    if(rnd==1){
+        location="41.38581022388023 2.164093270766898"
+    }else if(rnd==2){
+        location="41.40350561240383 2.174537390274054"
+    }
+    else if(rnd==3){
+        location="41.392759856096234 2.1448724254150875"
+    }
 
+// Set the headers
+    var headers = {
+        'Content-Type': 'application/json',
+        'IDENTITY_KEY': "b09af6daff593bfc2ddc612947e8e1e7baa8db30d0a7da6cda9964de2e183d47"
+    }
+
+// Configure the request
+    var options = {
+        url: 'https://api.thingtia.cloud/data/6d61736d69/Parking_Meter'+rnd,
+        method: 'PUT',
+        headers: headers,
+        body:JSON.stringify({"observations":[{"value":getRndInteger(0,50), "location": location }]})
+    }
+
+// Start the request
+    request(options, function (error, response, body) {
+        // Print out the response body
     })
 }
 
 app.listen(3500, function () {
 
-
-     setInterval(putTimer, 3000);
+    setInterval(putTimer, 60000);
+    setInterval(putTimer2, 60000);
     console.log('App listening on port 3500!!')
 });
