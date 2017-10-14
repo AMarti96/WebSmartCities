@@ -50,8 +50,8 @@ function deg2rad(deg) {
 router.get("/nearParking",function (req,res) {
 
 
-    var userlat=req.body.lat
-    var userlon=req.body.lon
+    var userlat=41.3925
+    var userlon=2.1450999999999567
     var sensors= []
     var nodes=[]
     var distances= []
@@ -70,24 +70,24 @@ router.get("/nearParking",function (req,res) {
             var URI=URL+'/'+provider;
 
             request( {
-                uri:URI,
+                uri:URI+"?limit=5",
                 headers: {"IDENTITY_KEY":nodes[i].token,"Content-Type": "application/json"}
             },function (error,response,body) {
 
                 body=JSON.parse(body)
                 for(i=0;i<body.sensors.length;i++) {
-                    sensors.push({sensor:body.sensors[0].sensor, location:body.sensors[0].observations[0].location})
+                    sensors.push({sensor:body.sensors[i].sensor, location:body.sensors[i].observations[0].location,value:body.sensors[i].observations[0].value})
                 }
 
                 for(i=0;i<sensors.length;i++) {
                     var latlon=sensors[i].location.split(" ")
                     var distance = getDistanceFromLatLonInKm(userlat,userlon,latlon[0],latlon[1])
-                    distances.push({name:sensors[i].name,distance:distance})
+                    distances.push({latlon:latlon,distance:distance,value:sensors[i].value})
                 }
                 var sorted = distances.sort(function(a, b) {
-                    return (a.value > b.value) ? 1 : ((b.value > a.value) ? -1 : 0)
+                    return (a.distance > b.distance) ? 1 : ((b.distance > a.distance) ? -1 : 0)
                 });
-                res.send(sorted[0])
+                res.send(sorted)
             })
 
         }
