@@ -171,7 +171,7 @@ function putTimer3() {
 
 app.listen(80, function () {
 
-    setInterval(putTimer1, 2000);
+    //setInterval(putTimer1, 2000);
     //setInterval(putTimer2, 60000);
     //setInterval(putTimer3, 60000);
     console.log('App listening on port 3500!!')

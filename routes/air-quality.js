@@ -61,6 +61,6 @@ router.get('/sensor/:types', function (req, res) {
 
 
 router.get('*', function(req, res){
-    res.sendFile(path.join(__dirname, '../public/tpls', 'error.html'));
+    res.sendFile(path.join(__dirname, '../public/tpls/', 'error.html'));
 });
 module.exports = router;
