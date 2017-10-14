@@ -38,11 +38,11 @@ app.use("/air",readAirQuality);
 app.use("/people",readPeople);
 
 app.post("/newInfo",function (req,res) {
-    if(req.params.provider==air.name)
+    if(req.body.provider===air.name)
         socket.emit('newco2',req.body);
-    else if(req.params.provider==parking.name)
+    else if(req.body.provider===parking.name)
         socket.emit('newparking',req.body);
-    else if(req.params.provider==people.name)
+    else if(req.body.provider===people.name)
         socket.emit('newpeople',req.body);
     else
         console.log("ERROR in sockets")
