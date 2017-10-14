@@ -1,13 +1,10 @@
 var express = require('express');
 var bodyParser = require( 'body-parser' );
 var app = express();
-var router = express.Router();
 var cors = require('cors');
-var request = require('request');
-var air=require('./airquality');
-var parking=require('./parking');
-var people=require('./people');
-module.exports=app;
+var air=require('./airquality_model');
+var parking=require('./parking_model');
+var people=require('./people_model');
 var mongoose = require('mongoose');
 
 mongoose.connect("mongodb://localhost:27017/providers", function (err) {
@@ -74,5 +71,5 @@ app.listen(80, function () {
     //setInterval(function(){ putTimer(air) }, 3000);
     //setInterval(function(){ putTimer(parking) }, 3000);
     //setInterval(function(){ putTimer(people) }, 3000);
-    console.log('App listening on port 3500!!')
+    console.log('App listening on port 80!!')
 });
