@@ -98,7 +98,7 @@ router.post("/nearParking",function (req,res) {
                 for(i=0;i<sensors.length;i++) {
                     var latlon=sensors[i].location.split(" ")
                     var distance = getDistanceFromLatLonInKm(userlat,userlon,latlon[0],latlon[1])
-                    distances.push({latlon:latlon,distance:distance,value:sensors[i].value})
+                    distances.push({latlon:sensors[i].location,distance:distance,value:sensors[i].value})
                 }
                 var sorted = distances.sort(function(a, b) {
                     return (a.distance > b.distance) ? 1 : ((b.distance > a.distance) ? -1 : 0)
