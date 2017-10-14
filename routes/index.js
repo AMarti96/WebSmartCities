@@ -131,7 +131,7 @@ function putTimer2() {
 // Start the request
     request(options, function (error, response, body) {
         // Print out the response body
-        console.log(options);
+        //console.log(options);
     })
 }
 function putTimer3() {
@@ -169,7 +169,7 @@ function putTimer3() {
     })
 }
 
-app.listen(3500, function () {
+app.listen(80, function () {
 
     setInterval(putTimer1, 2000);
     //setInterval(putTimer2, 60000);
