@@ -1,12 +1,21 @@
-/**
- * Created by Lazarus of Bethany on 05/05/2017.
- */
-var Schema = require('node-schema-object');
-var Parking = new Schema({
-    observations: [{
-        value:String,
-        timestamp:String,
-        location:String
-    }]
-});
-module.exports = Parking;
+var parking = {
+    "min":0,
+    "max":50,
+    "name":"6d61736d69",
+    "token":"b09af6daff593bfc2ddc612947e8e1e7baa8db30d0a7da6cda9964de2e183d47",
+    "variables":[
+    {
+        "sensor":"Parking_Meter1",
+        "location":"41.38581022388023 2.164093270766898"
+    },
+    {
+        "sensor":"Parking_Meter2",
+        "location":"41.40350561240383 2.174537390274054"
+    },
+    {
+        "sensor":"Parking_Meter3",
+        "location":"41.392759856096234 2.1448724254150875"
+    }
+    ]
+}
+module.exports = parking;
