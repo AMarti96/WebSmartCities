@@ -23,6 +23,26 @@ var parking = {
     {
         "sensor":"Parking_Meter5",
         "location":"41.38893499432572 2.120406655885745"
+    },
+    {
+        "sensor":"Parking_Meter6",
+        "location":"41.3805826195271 2.1540069580078125"
+    },
+    {
+        "sensor":"Parking_Meter7",
+        "location":"41.38560576303636 2.1494579315185547"
+    },
+    {
+        "sensor":"Parking_Meter8",
+        "location":"41.38686149061934 2.1341371536254883"
+    },
+    {
+        "sensor":"Parking_Meter9",
+        "location":"41.37713703341386 2.1582984924316406"
+    },
+    {
+        "sensor":"Parking_Meter10",
+        "location":"41.4026042976081 2.1607446670532227"
     }
     ]
 }
